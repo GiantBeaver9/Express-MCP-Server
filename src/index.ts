@@ -55,7 +55,7 @@ const handleSessionRequest = async (req: express.Request, res: express.Response)
 
 app.get("/mcp", handleSessionRequest);
 app.delete("/mcp", handleSessionRequest);
-
-app.listen( () => {
-  console.log(`MCP server listening on http://localhost:${PORT_NUMBER}/mcp`);
+const port = process.env.PORT_NUMBER ?? "8081";
+app.listen(port, () => {
+  console.log(`MCP server listening on http://localhost:${port}/mcp`);
 });

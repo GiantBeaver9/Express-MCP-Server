@@ -1,9 +1,26 @@
-import { PDFDocument } from "pdf-lib";
-import pdfKit from "pdfkit";
-export async function pdfKitWriteToPdf(title: string, text: string, filepath: string): Promise<string>{
+import PDFDocument from "pdfkit";
+import fs from "fs"
+export async function pdfKitWriteToPdf(text: string, filepath: string): Promise<string>{
     return new Promise((resolve, reject)=>{
+        let successful = true;
+try{
+        const pdfDoc = new PDFDocument();
+        const stream = fs.createWriteStream(filepath)
 
-        const document = new PDFDocument();
-        const stream = new fs.createFileStream(path.join(filepath, title + ".pdf"))
+        pdfDoc.pipe(stream);
+        pdfDoc.text(text);
+        pdfDoc.end()
+
+        stream.on("finish", () => resolve(filepath));
+        stream.on("error", reject)
+}
+catch{
+    successful = false;
+}
+finally
+{
+    return successful ? `wrote pdf to ${filepath}` : `failed to write to ${filepath}`
+}
+
     });
 }
