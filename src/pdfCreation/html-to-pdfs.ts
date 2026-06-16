@@ -1,5 +1,4 @@
 import puppeteer from "puppeteer";
-import { success } from "zod";
 
 export async function writeHtmlToPdf(html: string,  filepath:string): Promise<string> {
     let successful = true;
