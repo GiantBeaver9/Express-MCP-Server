@@ -1,5 +1,5 @@
 import PDFDocument from "pdfkit";
-import fs from "fs"
+import fs from "node:fs"
 export async function pdfKitWriteToPdf(text: string, filepath: string): Promise<string>{
     return new Promise((resolve, reject)=>{
         let successful = true;

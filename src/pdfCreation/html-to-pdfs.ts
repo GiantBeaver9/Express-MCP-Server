@@ -7,15 +7,11 @@ export async function writeHtmlToPdf(html: string,  filepath:string): Promise<st
     const page = await browser.newPage();
     await page.setContent(html, {waitUntil: "load"} )
     await page.pdf({path: filepath, format: "A4", printBackground: true})
-
-
     }
     catch (err){
         successful = false;
-        
     }
     finally{
-        
     await browser.close()
     }
     return successful ? `wrote the html to ${filepath}` : `failed to write html to ${filepath}`
